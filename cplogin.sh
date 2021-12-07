@@ -75,9 +75,10 @@ CP_DATA=$(curl --proxy "" --interface "${INTERFACE}" --silent --show-error ${CAP
 # Look for the preauthid
 PRE_AUTH_ID=$(echo "$CP_DATA" | grep -a thisForm.preauthid.value  | awk -F\" '{print $2}')
 
-if [[ ! -z "PRE_AUTH_ID" ]]
-then
-    echo 'Got a preauthid. Attempting login'
+# Pre-auth not actually required
+#if [[ ! -z "PRE_AUTH_ID" ]]
+#then
+#    echo 'Got a preauthid. Attempting login'
     
     ENC_USER=$( rawurlencode "$USERNAME" )
     ENC_PASS=$( rawurlencode "$PASSWORD" )
@@ -105,11 +106,11 @@ then
     
     fi
  
-else
-    echo 'Unknown state'"\n\n"
-    echo "$CP_DATA"
-    exit 8
-fi
+#else
+#    echo 'Unknown state'"\n\n"
+#    echo "$CP_DATA"
+#    exit 8
+#fi
 
 
 
